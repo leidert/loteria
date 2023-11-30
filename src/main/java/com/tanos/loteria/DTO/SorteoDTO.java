@@ -1,10 +1,12 @@
 package com.tanos.loteria.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tanos.loteria.model.Sorteo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +18,8 @@ public class SorteoDTO {
     private Integer posicionCuatro;
     private Integer posicionCinco;
     private Integer posicionSeis;
-    private LocalDate fechaSorteo;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private Date fechaSorteo;
 
     public SorteoDTO(Sorteo sorteo) {
         this.id = sorteo.getId();
