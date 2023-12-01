@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("service")
@@ -25,6 +26,17 @@ public class SorteoService {
 
     public List<SorteoDTO> findAll(){
         return fabricaSorteoService.crearSorteosDto(sorteoRepository.findAll());
+    }
+
+    public List<SorteoDTO> saveAll(List<SorteoDTO> sorteos){
+        List<SorteoDTO> sorteoDTOS = new ArrayList<>();
+        sorteos.stream().forEach(sorteoDTO -> {
+            sorteoDTOS.add(fabricaSorteoService.crearSorteoDto(sorteoRepository.save(fabricaSorteoService.crearSorteo(sorteoDTO))));
+        });
+        return sorteoDTOS;
+    }
+    public void deleteAll(){
+        sorteoRepository.deleteAll();
     }
 
 }
